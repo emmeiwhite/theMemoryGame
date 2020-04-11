@@ -57,16 +57,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // let's create our card borad first
 
   const grid = document.querySelector(".grid");
-  const cardsChosen = [];
+  const cardsChosen = []; // Idea is to keep checking how many cards have been chosen
   const cardsChosenId = [];
 
   // here for a callback function, the 'this' variable points to the element being clicked
-
-  function flipcard() {
-    console.log(this);
-    const dataId = this.getAttribute("id");
-    console.log(dataId);
-  }
 
   function createboard() {
     // adding blank.png image everywhere on our board. For that we'll create an img element
@@ -83,4 +77,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 
   createboard();
+
+  // Flipcard Function
+  function flipcard() {
+    console.log(this);
+    var cardId = this.getAttribute("id");
+    this.setAttribute("src", cardArray[cardId].img);
+    cardsChosen.push(cardArray[cardId].name);
+    console.log(cardsChosen);
+    cardsChosenId.push(cardId);
+    console.log(cardsChosenId);
+  }
 });
