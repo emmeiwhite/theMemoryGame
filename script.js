@@ -76,9 +76,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
-  createboard();
+  /* --- checkforMatch --- */
+  function checkforMatch() {}
 
-  // Flipcard Function
+  /* --- flipcard Function--- */
   function flipcard() {
     console.log(this);
     var cardId = this.getAttribute("id");
@@ -87,5 +88,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
     console.log(cardsChosen);
     cardsChosenId.push(cardId);
     console.log(cardsChosenId);
+
+    if (cardsChosen.length == 2) {
+      // We want to match after every two cards are flipped
+      setTimeout(checkforMatch, 500);
+    }
   }
+  createboard();
 });
