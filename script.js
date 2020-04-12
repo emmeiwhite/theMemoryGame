@@ -77,7 +77,18 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 
   /* --- checkforMatch --- */
-  function checkforMatch() {}
+  function checkforMatch() {
+    const cards = document.querySelectorAll("img");
+    const optionOneId = cardsChosenId[0];
+    const optionTwoId = cardsChosenId[1];
+
+    console.log(Array.from(cards));
+    if (cardsChosen[0] === cardsChosen[1]) {
+      alert("You have found a match");
+    } else {
+      alert("There is no match play again");
+    }
+  }
 
   /* --- flipcard Function--- */
   function flipcard() {
@@ -85,9 +96,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     var cardId = this.getAttribute("id");
     this.setAttribute("src", cardArray[cardId].img);
     cardsChosen.push(cardArray[cardId].name);
-    console.log(cardsChosen);
+
     cardsChosenId.push(cardId);
-    console.log(cardsChosenId);
 
     if (cardsChosen.length == 2) {
       // We want to match after every two cards are flipped
