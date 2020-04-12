@@ -57,8 +57,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // let's create our card borad first
 
   const grid = document.querySelector(".grid");
-  const cardsChosen = []; // Idea is to keep checking how many cards have been chosen
-  const cardsChosenId = [];
+  let cardsChosen = []; // Idea is to keep checking how many cards have been chosen
+  let cardsChosenId = [];
+  let cardsWon = [];
 
   // here for a callback function, the 'this' variable points to the element being clicked
 
@@ -85,9 +86,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
     console.log(Array.from(cards));
     if (cardsChosen[0] === cardsChosen[1]) {
       alert("You have found a match");
+      cards[optionOneId].setAttribute("src", "./images/white.png");
+      cards[optionTwoId].setAttribute("src", "./images/white.png");
+
+      cardsWon.push(cardsChosen);
+      console.log("CardsWon says :");
+      console.dir(cardsWon); // Array of paired array ... chosenCards pairs
     } else {
-      alert("There is no match play again");
+      cards[optionOneId].setAttribute("src", "./images/blank.png");
+      cards[optionTwoId].setAttribute("src", "./images/blank.png");
+      alert("Sorry, Try again");
     }
+
+    cardsChosen = [];
+    cardsChosenId = [];
   }
 
   /* --- flipcard Function--- */
