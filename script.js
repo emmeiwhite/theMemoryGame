@@ -57,8 +57,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // let's create our card borad first
 
   const grid = document.querySelector(".grid");
-  const cardsChosen = []; // Idea is to keep checking how many cards have been chosen
-  const cardsChosenId = [];
+  let cardsChosen = []; // Idea is to keep checking how many cards have been chosen
+  let cardsChosenId = [];
+  let cardsWon = [];
 
   // here for a callback function, the 'this' variable points to the element being clicked
 
@@ -77,7 +78,29 @@ document.addEventListener("DOMContentLoaded", (e) => {
   }
 
   /* --- checkforMatch --- */
-  function checkforMatch() {}
+  function checkforMatch() {
+    const cards = document.querySelectorAll("img");
+    const optionOneId = cardsChosenId[0];
+    const optionTwoId = cardsChosenId[1];
+
+    console.log(Array.from(cards));
+    if (cardsChosen[0] === cardsChosen[1]) {
+      alert("You have found a match");
+      cards[optionOneId].setAttribute("src", "./images/white.png");
+      cards[optionTwoId].setAttribute("src", "./images/white.png");
+
+      cardsWon.push(cardsChosen);
+      console.log("CardsWon says :");
+      console.dir(cardsWon); // Array of paired array ... chosenCards pairs
+    } else {
+      cards[optionOneId].setAttribute("src", "./images/blank.png");
+      cards[optionTwoId].setAttribute("src", "./images/blank.png");
+      alert("Sorry, Try again");
+    }
+
+    cardsChosen = [];
+    cardsChosenId = [];
+  }
 
   /* --- flipcard Function--- */
   function flipcard() {
@@ -85,9 +108,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     var cardId = this.getAttribute("id");
     this.setAttribute("src", cardArray[cardId].img);
     cardsChosen.push(cardArray[cardId].name);
-    console.log(cardsChosen);
+
     cardsChosenId.push(cardId);
-    console.log(cardsChosenId);
 
     if (cardsChosen.length == 2) {
       // We want to match after every two cards are flipped
