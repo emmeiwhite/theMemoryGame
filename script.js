@@ -83,12 +83,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const optionOneId = cardsChosenId[0];
     const optionTwoId = cardsChosenId[1];
 
-    console.log(Array.from(cards));
-    if (cardsChosen[0] === cardsChosen[1]) {
+    if (
+      cardsChosen[0] === cardsChosen[1] &&
+      cardsChosenId[0] !== cardsChosenId[1]
+    ) {
       alert("You have found a match");
       cards[optionOneId].setAttribute("src", "./images/white.png");
       cards[optionTwoId].setAttribute("src", "./images/white.png");
 
+      cards[optionOneId].style.pointerEvents = "none";
+      cards[optionTwoId].style.pointerEvents = "none";
       cardsWon.push(cardsChosen);
       console.log("CardsWon says :");
       console.dir(cardsWon); // Array of paired array ... chosenCards pairs
@@ -102,7 +106,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     cardsChosenId = [];
   }
 
-  /* --- flipcard Function--- */
+  /* --- flipcard Function --- */
   function flipcard() {
     console.log(this);
     var cardId = this.getAttribute("id");
